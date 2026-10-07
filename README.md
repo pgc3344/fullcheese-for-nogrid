@@ -14,6 +14,7 @@
 - 🔒 **권한 0개** — `chzzk.naver.com`에서만 동작하는 스크립트 하나
 - 📦 **빌드 불필요** — 파일 두 개, 압축 풀고 바로 로드
 - 🚫 **P2P 미사용** — 그리드(P2P) 트랙은 고르지 않습니다
+- 💊 **알림** — 최고 화질이 적용되면 위쪽에 알약 알림이 3초간 떴다 사라집니다
 - 🎛️ **선택 존중** — 방송 진입 후 15초만 최고 화질을 맞추고, 그 뒤엔 직접 고른 화질을 유지
 
 ### 설치 (Chrome / Edge)
@@ -43,6 +44,7 @@ CHZZK asks you to install Grid (Naver Live Streaming Connector) for high quality
 - 🔒 **Zero permissions** — a single script that runs only on `chzzk.naver.com`
 - 📦 **No build step** — two files, unzip and load
 - 🚫 **No P2P** — Grid (P2P) tracks are never selected
+- 💊 **Notice** — a pill toast appears at the top for 3 s once top quality is applied
 - 🎛️ **Respects your choice** — forces top quality for 15 s after a stream loads, then leaves your manual selection alone
 
 ### Install (Chrome / Edge)

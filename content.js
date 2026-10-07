@@ -12,7 +12,24 @@
   const isLL = t => t.kind === "low-latency" || t.kind === "low-latency-p2p";
   const side = t => Math.min(t.width, t.height);
 
-  let applied = "", left = 0;
+  // 화면 위쪽 가운데에 잠깐 떴다 사라지는 알약
+  const toast = text => {
+    const el = document.createElement("div");
+    el.textContent = text;
+    el.style.cssText = "position:fixed;top:20px;left:50%;z-index:2147483647;" +
+      "transform:translate(-50%,-12px);opacity:0;transition:opacity .3s,transform .3s;" +
+      "padding:9px 18px;border-radius:999px;background:rgba(20,20,20,.88);color:#fff;" +
+      "font:600 14px/1.2 system-ui,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,.35);" +
+      "border:1px solid #00ffa3;pointer-events:none;white-space:nowrap";
+    document.body.appendChild(el);
+    requestAnimationFrame(() => { el.style.opacity = "1"; el.style.transform = "translate(-50%,0)"; });
+    setTimeout(() => {
+      el.style.opacity = "0"; el.style.transform = "translate(-50%,-12px)";
+      setTimeout(() => el.remove(), 300);
+    }, 3000);
+  };
+
+  let applied = "", left = 0, shown = false;
   setInterval(() => {
     if (!list || !list.length) {
       list = null;
@@ -21,7 +38,7 @@
     }
     const tracks = from(list);
     const id = tracks.map(t => t.label).join(",");
-    if (id !== applied) { applied = id; left = 15; } // 방송 바뀌면 15초간 재적용
+    if (id !== applied) { applied = id; left = 15; shown = false; } // 방송 바뀌면 15초간 재적용
     if (left-- <= 0) return;                         // 이후엔 사용자 선택 존중
 
     const ok = tracks.filter(t => !isP2P(t) && t.label !== "ABR" && side(t) > 0);
@@ -30,5 +47,9 @@
       side(b) !== side(a) ? (side(b) > side(a) ? b : a) : (isLL(b) && !isLL(a) ? b : a));
     const cur = tracks.find(t => t.selected);
     if (!cur || side(cur) < side(best)) best.selected = true;
+    if (!shown && document.body) {
+      shown = true;
+      toast(`🧀 ${side(best)}p로 재생 중 · 그리드를 우회했어요`);
+    }
   }, 1000);
 })();
