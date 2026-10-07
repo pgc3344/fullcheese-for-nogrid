@@ -1,12 +1,19 @@
 {
   "manifest_version": 3,
-  "name": "chzzk-1080",
-  "version": "1.0",
+  "name": "FullCheese for NoGrid",
+  "version": "1.0.1",
   "description": "치지직 그리드 없이 최고 화질 선택",
-  "content_scripts": [{
-    "matches": ["https://chzzk.naver.com/*"],
-    "js": ["content.js"],
-    "run_at": "document_start",
-    "world": "MAIN"
-  }]
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chzzk.naver.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "homepage_url": "https://github.com/pgc3344/fullcheese-for-nogrid"
 }
